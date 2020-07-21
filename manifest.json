@@ -21,7 +21,7 @@
     }
   ],
   "browser_action": {
-     "default_icon": "fms.png"
+     "default_icon": "profiles/fms/fms.png"
   },
   "options_ui": {
     "page": "options.html",

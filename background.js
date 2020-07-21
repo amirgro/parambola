@@ -1,5 +1,5 @@
 
-const profile = localStorage.getItem('parambola-profile');
+// const profile = localStorage.getItem('parambola-profile');
 
 chrome.tabs.onUpdated.addListener( function (tabId, changeInfo, tab) {
   if (changeInfo?.status === 'complete') {
@@ -10,7 +10,7 @@ chrome.tabs.onUpdated.addListener( function (tabId, changeInfo, tab) {
 });
 
 chrome.tabs.onActivated.addListener(function(activeInfo) {
-  chrome.tabs.sendMessage(tabId, {
+  chrome.tabs.sendMessage(activeInfo.tabId, {
     message: 'TabUpdated'
   });
 });
@@ -22,13 +22,13 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
 });
 
 chrome.browserAction.onClicked.addListener(function(tab) {
-  const fmsParams = '?obAbtest=9820-43007-43247&adnginmode=true&obTestMode=true&skipContextValidation=true';
+  const fmsParams = '?obAbtest=9820-43007-43247&adnginmode=true&obTestMode=true&skipContextValidation=true'; // TODO get from profile config
   const isFMS = tab?.url.includes('obAbtest');
   if(isFMS) {
-    chrome.browserAction.setIcon({path: 'smartfeed.png'});
+    chrome.browserAction.setIcon({path: 'profiles/fms/smartfeed.png'});// TODO get from profile config
     chrome.tabs.update(tab.id, {url: tab.url.replace(fmsParams, '')});
   } else {
-    chrome.browserAction.setIcon({path: 'fms.png'});
+    chrome.browserAction.setIcon({path: 'profiles/fms/fms.png'});// TODO get from profile config + remove from manifest
     chrome.tabs.update(tab.id, {url: tab.url+fmsParams});
   }
 });
