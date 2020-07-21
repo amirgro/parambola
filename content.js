@@ -1,5 +1,10 @@
 chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
-  if (request.message === 'TabUpdated') {debugger;
-    chrome.runtime.sendMessage({newIcon: document.location.href.includes('obAbtest') ? 'fms.png' : 'smartfeed.png'});
+  const sendNewIconEvent = () => chrome.runtime.sendMessage({newIcon: document.location.href.includes('obAbtest') ? 'fms.png' : 'smartfeed.png'});
+  if (request.message === 'TabUpdated') {
+    if (document.readyState === 'complete') {
+      sendNewIconEvent();
+    } else {
+      window.addEventListener("load", sendNewIconEvent);
+    }
   }
 })

@@ -1,10 +1,18 @@
 
+const profile = localStorage.getItem('parambola-profile');
+
 chrome.tabs.onUpdated.addListener( function (tabId, changeInfo, tab) {
   if (changeInfo?.status === 'complete') {
     chrome.tabs.sendMessage(tabId, {
       message: 'TabUpdated'
     });
   }
+});
+
+chrome.tabs.onActivated.addListener(function(activeInfo) {
+  chrome.tabs.sendMessage(tabId, {
+    message: 'TabUpdated'
+  });
 });
 
 chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
