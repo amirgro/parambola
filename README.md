@@ -1,2 +1,2 @@
-# paramanager
-A chrome extension for adding and managing your favorite query params
+# parambula
+A chrome extension for toggling your favorite query params
