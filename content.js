@@ -1,5 +1,5 @@
-chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
-  const sendNewIconEvent = () => chrome.runtime.sendMessage({newIcon: document.location.href.includes('obAbtest') ? 'profiles/fms/smartfeed.png' : 'profiles/fms/fms.png'});// TODO get from profile config
+chrome.runtime.onMessage.addListener(function (request) {debugger;
+  const sendNewIconEvent = () => chrome.runtime.sendMessage({newIcon: {url: document.location.href}});
   if (request.message === 'TabUpdated') {
     if (document.readyState === 'complete') {
       sendNewIconEvent();

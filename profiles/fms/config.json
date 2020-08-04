@@ -1,7 +1,8 @@
 {
   "params": "obAbtest=9820-43007-43247&adnginmode=true&obTestMode=true&skipContextValidation=true",
+  "removeParamsString": "obAbtest",
   "icons": {
     "paramsIncluded" :"fms.png",
-    "paramsDiscluded": "outbrain.png"
+    "paramsDiscluded": "smartfeed.png"
   }
 }
