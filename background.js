@@ -22,13 +22,15 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
 });
 
 chrome.browserAction.onClicked.addListener(function(tab) {
-  const fmsParams = '?obAbtest=9820-43007-43247&adnginmode=true&obTestMode=true&skipContextValidation=true'; // TODO get from profile config
+  const params = 'obAbtest=9820-43007-43247&adnginmode=true&obTestMode=true&skipContextValidation=true'; // TODO get from profile config
   const isFMS = tab?.url.includes('obAbtest');
   if(isFMS) {
-    chrome.browserAction.setIcon({path: 'profiles/fms/smartfeed.png'});// TODO get from profile config
-    chrome.tabs.update(tab.id, {url: tab.url.replace(fmsParams, '')});
+    const newUrl = tab.url.replace(`?${params}`, '').replace(`&${params}`, '');
+    chrome.browserAction.setIcon({path: 'profiles/fms/fms.png'});// TODO get from profile config
+    chrome.tabs.update(tab.id, {url: newUrl});
   } else {
-    chrome.browserAction.setIcon({path: 'profiles/fms/fms.png'});// TODO get from profile config + remove from manifest
-    chrome.tabs.update(tab.id, {url: tab.url+fmsParams});
+    const firstChar = tab?.url.includes('?') ? '&' : '?';
+    chrome.browserAction.setIcon({path: 'profiles/fms/smartfeed.png'});// TODO get from profile config + remove from manifest
+    chrome.tabs.update(tab.id, {url: `${tab.url}${firstChar}${params}`});
   }
 });
